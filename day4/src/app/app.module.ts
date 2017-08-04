@@ -13,6 +13,10 @@ import { RepoDetailComponent } from './github/repo-detail/repo-detail.component'
 import { ContactComponent } from './contact/contact.component';
 import { RbacService } from './rbac/rbac.service';
 
+import { page1Component } from './pages/page1/page1.component';
+import { page2Component } from './pages/page2/page2.component';
+import { page3Component } from './pages/page3/page3.component';
+
 const rootRouterConfig: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -27,7 +31,15 @@ const rootRouterConfig: Routes = [
         ]
       }]
   },
-  { path: 'contact', component: ContactComponent, canActivate: [RbacService] }
+  { path: 'contact', component: ContactComponent, canActivate: [RbacService] },
+
+  { path: 'page1', component: page1Component},
+  { path: 'page2', component: page2Component},
+  { path: 'page3', component: page3Component,
+    children: [
+      { path: '', component: page3Component},
+      { path: ':searchDetail', component: ContactComponent}]
+  }
 ];
 
 @NgModule({
@@ -38,7 +50,11 @@ const rootRouterConfig: Routes = [
     RepoBrowserComponent,
     RepoListComponent,
     RepoDetailComponent,
-    ContactComponent
+    ContactComponent,
+    page1Component,
+    page2Component,
+    page3Component
+
   ],
   imports: [
     BrowserModule,
